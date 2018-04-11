@@ -1,0 +1,73 @@
+{
+  "name": "when-to-call-api",
+  "version": "0.0.1",
+  "description": "API for the WhenToCall app",
+  "main": "index.js",
+  "repository": "git@github.com:jamesacarr/when-to-call-api.git",
+  "author": "James Carr <james@jacarr.me>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "micro-dev -p 3001",
+    "metrics": "xo --fix",
+    "metrics:ci": "xo",
+    "precommit": "lint-staged",
+    "start": "micro",
+    "test": "jest",
+    "test:ci": "jest --ci --testResultsProcessor=\"jest-junit\"",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch"
+  },
+  "jest": {
+    "coverageDirectory": "coverage",
+    "collectCoverageFrom": [
+      "**/*.js",
+      "!**/__mocks__/**",
+      "!**/node_modules/**",
+      "!coverage/**"
+    ]
+  },
+  "lint-staged": {
+    "*.js": [
+      "yarn metrics",
+      "git add",
+      "yarn test --findRelatedTests"
+    ]
+  },
+  "prettier": {
+    "bracketSpacing": true,
+    "printWidth": 120
+  },
+  "xo": {
+    "space": true,
+    "prettier": true,
+    "env": [
+      "es6",
+      "jest",
+      "node"
+    ],
+    "overrides": [
+      {
+        "files": "**/*.spec.js",
+        "rules": {
+          "max-nested-callbacks": 0
+        }
+      }
+    ]
+  },
+  "devDependencies": {
+    "eslint": "^4.18.2",
+    "husky": "^0.14.3",
+    "jest": "^22.4.2",
+    "jest-junit": "^3.6.0",
+    "lint-staged": "^7.0.0",
+    "micro-dev": "^2.2.2",
+    "xo": "^0.20.3"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "micro": "^9.1.4",
+    "micro-cors": "^0.1.0",
+    "microrouter": "^3.1.2",
+    "now-env": "^3.0.4"
+  }
+}
